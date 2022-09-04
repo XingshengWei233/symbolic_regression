@@ -1,11 +1,15 @@
-#include "swap.h"
+#include "Genome.h"
+#include <iostream>
+using namespace std;
+
+void test(){
+
+}
 
 int main(int argc, char **argv)
 {
-    swap myswap(10, 20);
-    myswap.printInfo();
-    myswap.run();
-    myswap.printInfo();
+    Genome genome();
+    cout << "111";
 
     return 0;
 }
