@@ -150,33 +150,6 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/main_cmake.dir/build.make CMakeFiles/main_cmake.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-src/Genome.o: src/Genome.cpp.o
-
-.PHONY : src/Genome.o
-
-# target to build an object file
-src/Genome.cpp.o:
-	$(MAKE) -f CMakeFiles/main_cmake.dir/build.make CMakeFiles/main_cmake.dir/src/Genome.cpp.o
-.PHONY : src/Genome.cpp.o
-
-src/Genome.i: src/Genome.cpp.i
-
-.PHONY : src/Genome.i
-
-# target to preprocess a source file
-src/Genome.cpp.i:
-	$(MAKE) -f CMakeFiles/main_cmake.dir/build.make CMakeFiles/main_cmake.dir/src/Genome.cpp.i
-.PHONY : src/Genome.cpp.i
-
-src/Genome.s: src/Genome.cpp.s
-
-.PHONY : src/Genome.s
-
-# target to generate assembly for a file
-src/Genome.cpp.s:
-	$(MAKE) -f CMakeFiles/main_cmake.dir/build.make CMakeFiles/main_cmake.dir/src/Genome.cpp.s
-.PHONY : src/Genome.cpp.s
-
 src/Population.o: src/Population.cpp.o
 
 .PHONY : src/Population.o
@@ -216,9 +189,6 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... src/Genome.o"
-	@echo "... src/Genome.i"
-	@echo "... src/Genome.s"
 	@echo "... src/Population.o"
 	@echo "... src/Population.i"
 	@echo "... src/Population.s"

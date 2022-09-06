@@ -6,23 +6,13 @@
 
 #IncludeRegexTransform: 
 
-../include/Genome.h
-iostream
--
-vector
--
-
 ../include/Population.h
 iostream
 -
 vector
 -
-Genome.h
-../include/Genome.h
 
 /home/xingsheng/symbolic_regression/main.cpp
-Genome.h
-/home/xingsheng/symbolic_regression/Genome.h
 Population.h
 /home/xingsheng/symbolic_regression/Population.h
 iostream
