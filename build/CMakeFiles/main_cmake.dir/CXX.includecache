@@ -12,25 +12,15 @@ iostream
 vector
 -
 
-/home/xingsheng/symbolic_regression/main.cpp
+/home/xingsheng/symbolic_regression/src/Population.cpp
 Population.h
-/home/xingsheng/symbolic_regression/Population.h
+/home/xingsheng/symbolic_regression/src/Population.h
 iostream
 -
-cmath
+algorithm
 -
-cstdlib
--
-time.h
+random
 -
 string
--
-fstream
--
-cassert
--
-vector
--
-algorithm
 -
 
