@@ -16,11 +16,15 @@ public:
     // int nodes[256];
     vector<float> nodes;
     int rank;
-    int val;
+    int loss;
+    float probConstantNode;
+    float probConstantLeaf;
     void generate();
     float assignNode();
     float assignLeaf();
-    float evaluation();
+    float evaluate(float x);
+    string expression();
+    void print();
 };
 
 // Genome::Genome(/* args */)

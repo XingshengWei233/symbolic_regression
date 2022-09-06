@@ -12,8 +12,9 @@ public:
     Population(int popSize);
     ~Population();
     int popSize;
-    void mutate(Genome *ptr_genome);
-    void crossover(Genome *ptr_genome0, Genome *ptr_genome1);
+    void generate();
+    void mutate(Genome& genome);
+    void crossover(Genome& ptr_genome0, Genome& ptr_genome1);
     void insertSelect();
     vector<Genome> genomeVec;
 };

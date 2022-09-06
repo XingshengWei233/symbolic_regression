@@ -1,111 +1,166 @@
 #include "Genome.h"
 #include <iostream>
 #include <random>
+#include <string>
 using namespace std;
+// -1:  x
+// -2: cos
+// -3: sin
+// -4: /
+// -5: *
+// -6: -
+// -7: +
 
-
-
-Genome::Genome(){
-    
+Genome::Genome()
+{
+    this->nodes.reserve(this->L);
+    this->probConstantNode = 0.2;
+    this->probConstantLeaf = 0.8;
+    generate();
 }
 
-
-Genome::~Genome(){
-
+Genome::~Genome()
+{
 }
 
-void Genome::generate(){
-    for (int i = 0; i < this->L / 2; i++){
-        this->nodes[i] = assignNode();
-    }
-    for (int i = this->L / 2; i < this->L; i++){
-        this->nodes[i] = assignLeaf();
-    }
-    
-}
-
-float Genome::assignNode(){
-    int maxConstant = this->maxConstant;
-    int oprt = (rand() % 10);//decide operater, +-* / or trig
-    if (oprt >= 0 && oprt < 1) {
-        return -1; //generate a constant from -1 standing for x (0 children)
-    }
-    if (oprt >= 1 && oprt < 4) {
-        return (rand() % maxConstant); //generate a constant from 0 to 9 (0 children)
-    }
-    if (oprt >= 4 && oprt < 6) {
-        return (rand() % 2) - 3; //generate a constant from -3 to -2 standing for sin, cos (1 children)
-    }
-    if (oprt >= 6 && oprt < 10) {
-        return (rand() % 4) - 7; //generate a constant from -7 to -4 standing for plus, minus, times, devide (2 children)
-    }
-}
-
-float Genome::assignLeaf(){
+float Genome::assignNode()
+{ // with possibel sub-nodes
     float r = rand() / static_cast<float>(RAND_MAX);
     int maxConstant = this->maxConstant;
-    if (r < 0.2) {
-        return -1; //generate a constant from -1 standing for x (0 children)
+    if (r < this->probConstantNode)
+    {
+        return (rand() % maxConstant); // generate a constant from -1 standing for x (0 children)
     }
-    if (r >= 0.2) {
-        return (rand() % maxConstant); //generate a constant from 0 to 99 (0 children)
+    else
+    {
+        return (rand() % 7) - 7; // generate a constant from 0 to 99 (0 children)
     }
 }
 
-vector<short> subTree(short index) {
-    // return a list of subtree index
-    vector<short> arr(2);
-    arr[0] = 0;
-    arr[1] = index;
-    for (short n = 2; n <= 8; n++) {
-        for (short i = pow(2, n - 1); i <= pow(2, n) - 1; i++) {
-
-            short arri = ((index - 1) * pow(2, n - 1) + i);
-            if (arri > 255) {
-                break;
-            }
-            arr.push_back(arri);
-        }
+float Genome::assignLeaf()
+{ // without possible sub_nodes
+    float r = rand() / static_cast<float>(RAND_MAX);
+    int maxConstant = this->maxConstant;
+    if (r < probConstantLeaf)
+    {
+        return (rand() % maxConstant); // generate a constant from -1 standing for x (0 children)
     }
-    return arr;
+    else
+    {
+        return -1; // generate a constant from 0 to 99 (0 children)
+    }
 }
 
-float Genome::evaluation(float x, vector<float> tree){
-    vector<float> biTree(256);
-    for (short i = 0; i < 256; i++) {
-        biTree[i] = tree[i];
+void Genome::generate()
+{
+    for (int i = 0; i < this->L / 2; i++)
+    {
+        this->nodes[i] = assignNode();
     }
-    for (short i = 128; i > 0; i--) {
-        if (biTree[i] == -7) {
-            biTree[i] = biTree[2 * i] + biTree[2 * i + 1];
-            biTree[2 * i] = 0; biTree[2 * i + 1] = 0;
+    for (int i = this->L / 2; i < this->L; i++)
+    {
+        this->nodes[i] = assignLeaf();
+    }
+    // this->loss
+}
+
+void Genome::print()
+{
+    cout << "loss:" << this->loss << " rank:" << this->rank << endl;
+    cout << "nodes:" << endl;
+    for (int i = 0; i < this->L; i++)
+    {
+        cout << this->nodes[i] << " ";
+    }
+    cout << endl;
+}
+
+float Genome::evaluate(float x)
+{ // change to a buffer tree
+    vector<float> newTree(this->L);
+    for (int i = 0; i < this->L; i++)
+    {
+        newTree[i] = this->nodes[i];
+    }
+    for (int i = 127; i > 0; i--)
+    {
+        if (newTree[i] == -7)
+        {
+            newTree[i] = newTree[2 * i] + newTree[2 * i + 1];
         }
-        if (biTree[i] == -6) {
-            biTree[i] = biTree[2 * i] - biTree[2 * i + 1];
-            biTree[2 * i] = 0; biTree[2 * i + 1] = 0;
+        if (newTree[i] == -6)
+        {
+            newTree[i] = newTree[2 * i] - newTree[2 * i + 1];
         }
-        if (biTree[i] == -5) {
-            biTree[i] = biTree[2 * i] * biTree[2 * i + 1];
-            biTree[2 * i] = 0; biTree[2 * i + 1] = 0;
+        if (newTree[i] == -5)
+        {
+            newTree[i] = newTree[2 * i] * newTree[2 * i + 1];
         }
-        if (biTree[i] == -4) {
-            if (biTree[2 * i + 1] == 0) {
-                biTree[2 * i + 1] = 1;
+        if (newTree[i] == -4)
+        {
+            if (newTree[2 * i + 1] == 0)
+            {
+                newTree[2 * i + 1] = 1;
             }
-            biTree[i] = biTree[2 * i] / biTree[2 * i + 1];
-            biTree[2 * i] = 0; biTree[2 * i + 1] = 0;
+            newTree[i] = newTree[2 * i] / newTree[2 * i + 1];
         }
-        if (biTree[i] == -3) {
-            biTree[i] = sin(biTree[2 * i]);
-            biTree[2 * i] = 0;
+        if (newTree[i] == -3)
+        {
+            newTree[i] = sin(newTree[2 * i]);
         }
-        if (biTree[i] == -2) {
-            biTree[i] = cos(biTree[2 * i]);
-            biTree[2 * i] = 0;
+        if (newTree[i] == -2)
+        {
+            newTree[i] = cos(newTree[2 * i]);
         }
-        if (biTree[i] == -1) {
-            biTree[i] = x;
+        if (newTree[i] == -1)
+        {
+            newTree[i] = x;
         }
     }
-    return biTree[1];
+    return newTree[1];
+}
+
+string Genome::expression()
+{
+    string stringTree[256];
+    for (short i = 255; i > 0; i--)
+    {
+        if (this->nodes[i] == -7)
+        { //+
+            stringTree[i] = "(" + stringTree[2 * i] + " + " + stringTree[2 * i + 1] + ")";
+            ;
+        }
+        if (this->nodes[i] == -6)
+        { //-
+            stringTree[i] = "(" + stringTree[2 * i] + " - " + stringTree[2 * i + 1] + ")";
+        }
+        if (this->nodes[i] == -5)
+        { //*
+            stringTree[i] = "(" + stringTree[2 * i] + " * " + stringTree[2 * i + 1] + ")";
+        }
+        if (this->nodes[i] == -4)
+        { // divide
+            stringTree[i] = "(" + stringTree[2 * i] + " / " + stringTree[2 * i + 1] + ")";
+        }
+        if (this->nodes[i] == -3)
+        { // sin
+            stringTree[i] = "sin(" + stringTree[2 * i] + ")";
+        }
+        if (this->nodes[i] == -2)
+        { // cos
+            stringTree[i] = "cos(" + stringTree[2 * i] + ")";
+        }
+        if (this->nodes[i] == -1)
+        { // x
+            stringTree[i] = "x";
+        }
+        if (this->nodes[i] > -1)
+        {
+            float num = this->nodes[i];
+            string strNum = to_string(num);
+            strNum = strNum.substr(0, strNum.size() - 4);
+            stringTree[i] = strNum;
+        }
+    }
+    return stringTree[1];
 }
