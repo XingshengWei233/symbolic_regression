@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/Genome.h
+iostream
+-
+
+/home/xingsheng/symbolic_regression/main.cpp
+Genome.h
+/home/xingsheng/symbolic_regression/Genome.h
+iostream
+-
+cmath
+-
+cstdlib
+-
+time.h
+-
+string
+-
+fstream
+-
+cassert
+-
+vector
+-
+algorithm
+-
+

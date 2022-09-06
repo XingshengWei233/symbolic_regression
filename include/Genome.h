@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 using namespace std;
 
 class Genome
@@ -8,16 +9,24 @@ class Genome
 private:
     /* data */
 public:
-    Genome(/* args */);
+    Genome();
     ~Genome();
-    int nodes[256];
-    void evaluation();
+    const int L = 256;
+    const float maxConstant = 10;
+    // int nodes[256];
+    vector<float> nodes;
+    int rank;
+    int val;
+    void generate();
+    float assignNode();
+    float assignLeaf();
+    float evaluation();
 };
 
-Genome::Genome(/* args */)
-{
-}
+// Genome::Genome(/* args */)
+// {
+// }
 
-Genome::~Genome()
-{
-}
+// Genome::~Genome()
+// {
+// }

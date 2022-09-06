@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
-
-project(SWAP)
-
-include_directories(include)
-
-add_executable(main_cmake main.cpp src/swap.cpp)
+project(SYMBOLIC_REGRESSION)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+set(CMAKE_BUILD_TYPE Debug)
+include_directories(${CMAKE_SOURCE_DIR}/include)
+add_executable(main_cmake main.cpp src/Genome.cpp src/Population.cpp)
