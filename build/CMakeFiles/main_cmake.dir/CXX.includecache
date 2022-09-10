@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+../include/DataPopulation.h
+iostream
+-
+vector
+-
+random
+-
+
 ../include/TreePopulation.h
 iostream
 -
@@ -17,6 +25,8 @@ random
 /home/xingsheng/symbolic_regression/main.cpp
 TreePopulation.h
 /home/xingsheng/symbolic_regression/TreePopulation.h
+DataPopulation.h
+/home/xingsheng/symbolic_regression/DataPopulation.h
 iostream
 -
 cmath

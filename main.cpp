@@ -1,4 +1,5 @@
 #include "TreePopulation.h"
+#include "DataPopulation.h"
 #include <iostream>
 #include <cmath>   //math operators
 #include <cstdlib> //generate random number
@@ -35,6 +36,7 @@ int main(int argc, char **argv)
     float datax[1000];
     float datay[1000];
     const int popSize = 10;
+    const int nIndices = 50;
     const int nChildren = 5;
     const int nMutation = 2;
     const int nWorker = 6;
@@ -43,9 +45,17 @@ int main(int argc, char **argv)
     vector<int> dataIndex{1, 32, 93, 402, 542, 135, 351, 643, 984, 234};
 
     // generate population
+    
+
     TreePopulation symPop(popSize);
     symPop.writeAllLoss(dataIndex, datax, datay);
     symPop.sortTrees();
+
+    DataPopulation dataPop(popSize, nIndices);
+    // for (int i = 0; i < 10; i++){
+    //     dataPop.printPriority(dataPop.priorityVec[i]);
+    // }
+    
 
     //reproduce, including mutation and creossover
     symPop.reproduce(nChildren, nMutation);

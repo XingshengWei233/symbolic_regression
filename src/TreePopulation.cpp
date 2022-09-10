@@ -50,19 +50,19 @@ void TreePopulation::reproduce(int nChildren, int nMutation){
         vector<float>& parent_1 = this->treeVec[rand() % this->popSize];
 
         cout<< "parent_0:" << endl;
-        printTree(parent_0);
+        // printTree(parent_0);
         cout<< "parent_1:" << endl;
-        printTree(parent_1);
+        // printTree(parent_1);
 
         vector<float> newTree = crossover(parent_0, parent_1);
 
         cout<< "child:" << endl;
-        printTree(newTree);
+        // printTree(newTree);
 
         mutate(newTree, nMutation);
 
         cout<< "mutated_child:" << endl;
-        printTree(newTree);
+        // printTree(newTree);
 
         this->treeVec.push_back(newTree);
     }
@@ -105,7 +105,7 @@ vector<float> TreePopulation::crossover(vector<float>& parent0, vector<float>& p
     }
     //select a subtree root
     int subTreeRoot = rand() % this->L;
-    cout << "subTreeRoot:" << subTreeRoot << endl;
+    // cout << "subTreeRoot:" << subTreeRoot << endl;
     //use bfs to traverse subtree to replace with parent_1
     queue<int> bfsQueue;
     bfsQueue.push(subTreeRoot);
