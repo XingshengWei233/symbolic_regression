@@ -70,29 +70,29 @@ CMakeFiles/main_cmake.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main_cmake.dir/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/xingsheng/symbolic_regression/main.cpp -o CMakeFiles/main_cmake.dir/main.cpp.s
 
-CMakeFiles/main_cmake.dir/src/Population.cpp.o: CMakeFiles/main_cmake.dir/flags.make
-CMakeFiles/main_cmake.dir/src/Population.cpp.o: ../src/Population.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/xingsheng/symbolic_regression/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main_cmake.dir/src/Population.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main_cmake.dir/src/Population.cpp.o -c /home/xingsheng/symbolic_regression/src/Population.cpp
+CMakeFiles/main_cmake.dir/src/TreePopulation.cpp.o: CMakeFiles/main_cmake.dir/flags.make
+CMakeFiles/main_cmake.dir/src/TreePopulation.cpp.o: ../src/TreePopulation.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/xingsheng/symbolic_regression/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main_cmake.dir/src/TreePopulation.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main_cmake.dir/src/TreePopulation.cpp.o -c /home/xingsheng/symbolic_regression/src/TreePopulation.cpp
 
-CMakeFiles/main_cmake.dir/src/Population.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main_cmake.dir/src/Population.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/xingsheng/symbolic_regression/src/Population.cpp > CMakeFiles/main_cmake.dir/src/Population.cpp.i
+CMakeFiles/main_cmake.dir/src/TreePopulation.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main_cmake.dir/src/TreePopulation.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/xingsheng/symbolic_regression/src/TreePopulation.cpp > CMakeFiles/main_cmake.dir/src/TreePopulation.cpp.i
 
-CMakeFiles/main_cmake.dir/src/Population.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main_cmake.dir/src/Population.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/xingsheng/symbolic_regression/src/Population.cpp -o CMakeFiles/main_cmake.dir/src/Population.cpp.s
+CMakeFiles/main_cmake.dir/src/TreePopulation.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main_cmake.dir/src/TreePopulation.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/xingsheng/symbolic_regression/src/TreePopulation.cpp -o CMakeFiles/main_cmake.dir/src/TreePopulation.cpp.s
 
 # Object files for target main_cmake
 main_cmake_OBJECTS = \
 "CMakeFiles/main_cmake.dir/main.cpp.o" \
-"CMakeFiles/main_cmake.dir/src/Population.cpp.o"
+"CMakeFiles/main_cmake.dir/src/TreePopulation.cpp.o"
 
 # External object files for target main_cmake
 main_cmake_EXTERNAL_OBJECTS =
 
 main_cmake: CMakeFiles/main_cmake.dir/main.cpp.o
-main_cmake: CMakeFiles/main_cmake.dir/src/Population.cpp.o
+main_cmake: CMakeFiles/main_cmake.dir/src/TreePopulation.cpp.o
 main_cmake: CMakeFiles/main_cmake.dir/build.make
 main_cmake: CMakeFiles/main_cmake.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/xingsheng/symbolic_regression/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable main_cmake"

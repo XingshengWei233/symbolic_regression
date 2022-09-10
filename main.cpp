@@ -1,5 +1,4 @@
-#include "Genome.h"
-#include "Population.h"
+#include "TreePopulation.h"
 #include <iostream>
 #include <cmath>   //math operators
 #include <cstdlib> //generate random number
@@ -10,7 +9,7 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-
+ 
 void loadData(string loadDir, float *datax, float *datay)
 {
     ifstream infile;
@@ -36,27 +35,42 @@ int main(int argc, char **argv)
     float datax[1000];
     float datay[1000];
     const int popSize = 10;
+    const int nChildren = 5;
+    const int nMutation = 2;
     const int nWorker = 6;
     // load data:
     loadData("data/data.txt", datax, datay);
-    int dataIndex[10] = {1, 32, 93, 402, 542, 135, 351, 643, 984, 234};
+    vector<int> dataIndex{1, 32, 93, 402, 542, 135, 351, 643, 984, 234};
 
     // generate population
-    Genome geno;
-    geno.print();
-    Population symPop(popSize);
-    cout << "symPop.genomeVec.size()" << symPop.genomeVec.size() << endl;
-    for (int i = 0; i < 10; i++){
-        symPop.genomeVec[i].print();
-    }
-    // vector<Genome> tree = symPop.genomeVec[0];
+    TreePopulation symPop(popSize);
+    symPop.writeAllLoss(dataIndex, datax, datay);
+    symPop.sortTrees();
+
+    //reproduce, including mutation and creossover
+    symPop.reproduce(nChildren, nMutation);
+    cout << "popSize: " << symPop.treeVec.size() << endl;
+
+    //select
+    //renew dataIndex = dataPop.dataIndex[0]
+    symPop.writeAllLoss(dataIndex, datax, datay);
+    symPop.sortTrees();
+    symPop.select();
+    cout << "popSize: " << symPop.treeVec.size() << endl;
+    //dataPop.reproduce();
+    //dataPop.sortPriorities();
+    //dataPop.select();
 
     // for (int i = 0; i < 1000; i++)
     // {
-    //     cout << "x: " << datax[i] << " y: " << geno.evaluate(datax[i]) << endl;
+    //     cout << "x: " << datax[i] << " y: " << symPop.evaluateOnce(symPop.treeVec[0], datax[i]) << endl;
     // }
-    // cout << "expression: " << geno.expression() << endl;
+    // cout << "expression: " << symPop.expression(0) << endl;
 
+    cout << "symPop.genomeVec.size()" << symPop.treeVec.size() << endl;
+    for (int i = 0; i < 10; i++){
+        symPop.printTree(symPop.treeVec[i]);
+    }
     cout << "end of program" << endl;
 
     return 0;

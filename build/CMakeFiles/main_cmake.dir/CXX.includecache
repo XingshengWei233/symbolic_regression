@@ -6,21 +6,33 @@
 
 #IncludeRegexTransform: 
 
-../include/Population.h
+../include/TreePopulation.h
 iostream
 -
 vector
 -
-
-/home/xingsheng/symbolic_regression/src/Population.cpp
-Population.h
-/home/xingsheng/symbolic_regression/src/Population.h
-iostream
--
-algorithm
--
 random
 -
+
+/home/xingsheng/symbolic_regression/main.cpp
+TreePopulation.h
+/home/xingsheng/symbolic_regression/TreePopulation.h
+iostream
+-
+cmath
+-
+cstdlib
+-
+time.h
+-
 string
+-
+fstream
+-
+cassert
+-
+vector
+-
+algorithm
 -
 

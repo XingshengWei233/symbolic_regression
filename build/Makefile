@@ -150,32 +150,32 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/main_cmake.dir/build.make CMakeFiles/main_cmake.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-src/Population.o: src/Population.cpp.o
+src/TreePopulation.o: src/TreePopulation.cpp.o
 
-.PHONY : src/Population.o
+.PHONY : src/TreePopulation.o
 
 # target to build an object file
-src/Population.cpp.o:
-	$(MAKE) -f CMakeFiles/main_cmake.dir/build.make CMakeFiles/main_cmake.dir/src/Population.cpp.o
-.PHONY : src/Population.cpp.o
+src/TreePopulation.cpp.o:
+	$(MAKE) -f CMakeFiles/main_cmake.dir/build.make CMakeFiles/main_cmake.dir/src/TreePopulation.cpp.o
+.PHONY : src/TreePopulation.cpp.o
 
-src/Population.i: src/Population.cpp.i
+src/TreePopulation.i: src/TreePopulation.cpp.i
 
-.PHONY : src/Population.i
+.PHONY : src/TreePopulation.i
 
 # target to preprocess a source file
-src/Population.cpp.i:
-	$(MAKE) -f CMakeFiles/main_cmake.dir/build.make CMakeFiles/main_cmake.dir/src/Population.cpp.i
-.PHONY : src/Population.cpp.i
+src/TreePopulation.cpp.i:
+	$(MAKE) -f CMakeFiles/main_cmake.dir/build.make CMakeFiles/main_cmake.dir/src/TreePopulation.cpp.i
+.PHONY : src/TreePopulation.cpp.i
 
-src/Population.s: src/Population.cpp.s
+src/TreePopulation.s: src/TreePopulation.cpp.s
 
-.PHONY : src/Population.s
+.PHONY : src/TreePopulation.s
 
 # target to generate assembly for a file
-src/Population.cpp.s:
-	$(MAKE) -f CMakeFiles/main_cmake.dir/build.make CMakeFiles/main_cmake.dir/src/Population.cpp.s
-.PHONY : src/Population.cpp.s
+src/TreePopulation.cpp.s:
+	$(MAKE) -f CMakeFiles/main_cmake.dir/build.make CMakeFiles/main_cmake.dir/src/TreePopulation.cpp.s
+.PHONY : src/TreePopulation.cpp.s
 
 # Help Target
 help:
@@ -189,9 +189,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... src/Population.o"
-	@echo "... src/Population.i"
-	@echo "... src/Population.s"
+	@echo "... src/TreePopulation.o"
+	@echo "... src/TreePopulation.i"
+	@echo "... src/TreePopulation.s"
 .PHONY : help
 
 
