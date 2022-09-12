@@ -13,7 +13,7 @@
 using namespace std;
  
 //TODO:
-// main algorithm
+// debug main algorithm
 // visulizer
 // move load data to util funcs
 
