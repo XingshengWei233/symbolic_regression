@@ -13,6 +13,8 @@ vector
 -
 random
 -
+TreePopulation.h
+../include/TreePopulation.h
 
 ../include/TreePopulation.h
 iostream

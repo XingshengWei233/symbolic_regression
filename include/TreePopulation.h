@@ -20,14 +20,10 @@ public:
     void generate();
     void mutate(vector<float>& tree, int nMutation);
     vector<float> crossover(vector<float>& parent_0, vector<float>& parent_1);
-    void insertSelect();
     vector<float> generateTree();
-    void writeAllLoss(vector<int>& dataIndex, float *datax, float *datay);
-    void writeTreeLoss(vector<float>& tree, 
-        vector<int>& dataIndex, float *datax, float *datay);
+    void writeLoss(vector<int>& dataIndex, float *datax, float *datay);
     float assignNode();
     float assignLeaf();
-    float evaluateOnce(vector<float>& tree, float x);
     string expression(vector<float>& tree);
     void printTree(vector<float>& tree);
     void sortTrees();

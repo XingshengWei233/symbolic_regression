@@ -204,6 +204,33 @@ src/TreePopulation.cpp.s:
 	$(MAKE) -f CMakeFiles/main_cmake.dir/build.make CMakeFiles/main_cmake.dir/src/TreePopulation.cpp.s
 .PHONY : src/TreePopulation.cpp.s
 
+src/UtilFuncs.o: src/UtilFuncs.cpp.o
+
+.PHONY : src/UtilFuncs.o
+
+# target to build an object file
+src/UtilFuncs.cpp.o:
+	$(MAKE) -f CMakeFiles/main_cmake.dir/build.make CMakeFiles/main_cmake.dir/src/UtilFuncs.cpp.o
+.PHONY : src/UtilFuncs.cpp.o
+
+src/UtilFuncs.i: src/UtilFuncs.cpp.i
+
+.PHONY : src/UtilFuncs.i
+
+# target to preprocess a source file
+src/UtilFuncs.cpp.i:
+	$(MAKE) -f CMakeFiles/main_cmake.dir/build.make CMakeFiles/main_cmake.dir/src/UtilFuncs.cpp.i
+.PHONY : src/UtilFuncs.cpp.i
+
+src/UtilFuncs.s: src/UtilFuncs.cpp.s
+
+.PHONY : src/UtilFuncs.s
+
+# target to generate assembly for a file
+src/UtilFuncs.cpp.s:
+	$(MAKE) -f CMakeFiles/main_cmake.dir/build.make CMakeFiles/main_cmake.dir/src/UtilFuncs.cpp.s
+.PHONY : src/UtilFuncs.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -222,6 +249,9 @@ help:
 	@echo "... src/TreePopulation.o"
 	@echo "... src/TreePopulation.i"
 	@echo "... src/TreePopulation.s"
+	@echo "... src/UtilFuncs.o"
+	@echo "... src/UtilFuncs.i"
+	@echo "... src/UtilFuncs.s"
 .PHONY : help
 
 

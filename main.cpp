@@ -11,6 +11,11 @@
 #include <algorithm>
 using namespace std;
  
+//TODO:
+// main algorithm
+// visulizer
+// move load data to util funcs
+
 void loadData(string loadDir, float *datax, float *datay)
 {
     ifstream infile;
@@ -33,13 +38,16 @@ int main(int argc, char **argv)
     srand((unsigned)time(NULL)); // give different seeds for random number
 
     // Parameters:
-    float datax[1000];
-    float datay[1000];
+    
     const int popSize = 10;
     const int nIndices = 50;
     const int nChildren = 5;
     const int nMutation = 2;
     const int nWorker = 6;
+    int iteration = 0;
+    int indicesRenewInterval = 10;
+    float datax[1000];
+    float datay[1000];
     // load data:
     loadData("data/data.txt", datax, datay);
     vector<int> dataIndex{1, 32, 93, 402, 542, 135, 351, 643, 984, 234};
@@ -48,7 +56,7 @@ int main(int argc, char **argv)
     
 
     TreePopulation symPop(popSize);
-    symPop.writeAllLoss(dataIndex, datax, datay);
+    symPop.writeLoss(dataIndex, datax, datay);
     symPop.sortTrees();
 
     DataPopulation dataPop(popSize, nIndices);
@@ -58,16 +66,21 @@ int main(int argc, char **argv)
     
 
     //reproduce, including mutation and creossover
+
     symPop.reproduce(nChildren, nMutation);
     cout << "popSize: " << symPop.treeVec.size() << endl;
 
     //select
     //renew dataIndex = dataPop.dataIndex[0]
-    symPop.writeAllLoss(dataIndex, datax, datay);
+
+    symPop.writeLoss(dataIndex, datax, datay);
     symPop.sortTrees();
     symPop.select();
     cout << "popSize: " << symPop.treeVec.size() << endl;
+
+    //if iteration % 100 ==0
     //dataPop.reproduce();
+    //dataPop.writeAllLoss();
     //dataPop.sortPriorities();
     //dataPop.select();
 

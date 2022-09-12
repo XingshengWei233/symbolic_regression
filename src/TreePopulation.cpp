@@ -4,6 +4,7 @@
 #include <random>
 #include <string>
 #include <queue>
+#include "UtilFuncs.h"
 using namespace std;
 
 TreePopulation::TreePopulation(int popSize)
@@ -173,68 +174,12 @@ void TreePopulation::printTree(vector<float>& tree)
     cout << endl;
 }
 
-void TreePopulation::writeAllLoss(vector<int>& dataIndex, float *datax, float *datay){
+void TreePopulation::writeLoss(vector<int>& dataIndex, float *datax, float *datay){
     for (int i = 0; i < this->treeVec.size(); i++){
-        writeTreeLoss(this->treeVec[i], dataIndex, datax, datay);
+        this->treeVec[i][0] = treeLoss(this->treeVec[i], dataIndex, datax, datay);
     }
 }
 
-void TreePopulation::writeTreeLoss(vector<float>& tree, 
-    vector<int>& dataIndex, float *datax, float *datay){
-    //write Mean square loss to the 0th index of tree
-    float sum = 0;
-    for (int i = 0; i < dataIndex.size(); i++){
-        float yPred = evaluateOnce(tree, datax[dataIndex[i]]);
-        float squareLoss = pow((datay[dataIndex[i]] - yPred), 2);
-        sum += squareLoss;
-    }
-    tree[0] = sum / dataIndex.size();
-}
-
-float TreePopulation::evaluateOnce(vector<float>& tree, float x)
-{ 
-    vector<float> newTree(this->L);
-    for (int i = 0; i < this->L; i++)
-    {
-        newTree[i] = tree[i];
-    }
-    for (int i = 127; i > 0; i--)
-    {
-        if (newTree[i] == -7)
-        {
-            newTree[i] = newTree[2 * i] + newTree[2 * i + 1];
-        }
-        if (newTree[i] == -6)
-        {
-            newTree[i] = newTree[2 * i] - newTree[2 * i + 1];
-        }
-        if (newTree[i] == -5)
-        {
-            newTree[i] = newTree[2 * i] * newTree[2 * i + 1];
-        }
-        if (newTree[i] == -4)
-        {
-            if (newTree[2 * i + 1] == 0)
-            {
-                newTree[2 * i + 1] = 1;
-            }
-            newTree[i] = newTree[2 * i] / newTree[2 * i + 1];
-        }
-        if (newTree[i] == -3)
-        {
-            newTree[i] = sin(newTree[2 * i]);
-        }
-        if (newTree[i] == -2)
-        {
-            newTree[i] = cos(newTree[2 * i]);
-        }
-        if (newTree[i] == -1)
-        {
-            newTree[i] = x;
-        }
-    }
-    return newTree[1];
-}
 
 void TreePopulation::sortTrees(){
     sort(this->treeVec.begin(), this->treeVec.end());

@@ -1,4 +1,5 @@
 #include "DataPopulation.h"
+#include "UtilFuncs.h"
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -23,10 +24,10 @@ DataPopulation::~DataPopulation()
 {
 }
 
-void DataPopulation::addTreePop(TreePopulation *ptr_treePop)
-{
-    this->ptr_treePop = ptr_treePop;
-}
+// void DataPopulation::addTreePop(TreePopulation *ptr_treePop)
+// {
+//     this->ptr_treePop = ptr_treePop;
+// }
 
 vector<float> DataPopulation::generatePriority()
 {
@@ -139,13 +140,7 @@ void DataPopulation::select()
         this->priorityVec.pop_back();
     }
 }
-// float evaluateOnce(vector<float>& tree, float x);
 
-// void DataPopulation::writePriorityLoss(vector<float>& tree,
-//         vector<int>& dataIndex, float *datax, float *datay)
-//     {
-//         float loss = this->ptr_treePop.
-//     }
 
 void DataPopulation::printPriority(vector<float> &priority)
 {
@@ -163,4 +158,10 @@ void DataPopulation::printPriority(vector<float> &priority)
         cout << priority[i] << " ";
     }
     cout << endl;
+}
+
+void DataPopulation::writeLoss(vector<int> &dataIndex, float *datax, float *datay){
+    for (int i = 0; i < this->priorityVec.size(); i++){
+        this->priorityVec[i][0] = treeLoss(this->priorityVec[i], dataIndex, datax, datay);
+    }
 }
