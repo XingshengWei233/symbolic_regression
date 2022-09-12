@@ -21,7 +21,7 @@ public:
     vector<float> crossover(vector<float> &parent0, vector<float> &parent1);
     vector<float> generatePriority();
     vector<int> priority2indices(vector<float> priority);
-    void writeLoss(vector<int> &dataIndex, float *datax, float *datay);
+    void writeLoss(vector<float> &tree, float *datax, float *datay);
     void printPriority(vector<float> &priority);
     void sortPriority();
     void reproduce(int nChildren, int nMutation);

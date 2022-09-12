@@ -9,14 +9,12 @@
 
 using namespace std;
 
-// TODO:
-// seperate loss calculation to another class maybe
 
 DataPopulation::DataPopulation(int popSize, int nIndices)
 {
     this->popSize = popSize;
     this->nIndices = nIndices;
-    this->priorityVec.reserve(this->popSize);
+    // this->priorityVec.reserve(this->popSize);
     generate();
 }
 
@@ -50,6 +48,10 @@ void DataPopulation::generate()
     }
 }
 
+void DataPopulation::sortPriority(){
+    sort(this->priorityVec.begin(), this->priorityVec.end(), greater<>());
+}
+
 vector<int> DataPopulation::priority2indices(vector<float> priority)
 {
     vector<int> indices(this->nIndices);
@@ -77,17 +79,19 @@ void DataPopulation::reproduce(int nChildren, int nMutation)
         cout << "parent_1:" << endl;
         // printTree(parent_1);
 
-        vector<float> newTree = crossover(parent_0, parent_1);
+        vector<float> child = crossover(parent_0, parent_1);
 
         cout << "child:" << endl;
         // printTree(newTree);
 
-        mutate(newTree, nMutation);
+        mutate(child, nMutation);
 
         cout << "mutated_child:" << endl;
+        cout << child.size() << endl;
+        cout << this->priorityVec[0].size() << endl;
         // printTree(newTree);
 
-        this->priorityVec.push_back(newTree);
+        this->priorityVec.push_back(child);
     }
 }
 
@@ -116,7 +120,7 @@ vector<float> DataPopulation::crossover(vector<float> &parent0, vector<float> &p
         swap(crossBegin, crossEnd);
     }
     // copy to new priority
-    vector<float> newPriority(this->nIndices);
+    vector<float> newPriority(this->L);
     for (int i = 0; i < this->L; i++)
     {
         if (i >= crossBegin && i < crossEnd)
@@ -160,8 +164,9 @@ void DataPopulation::printPriority(vector<float> &priority)
     cout << endl;
 }
 
-void DataPopulation::writeLoss(vector<int> &dataIndex, float *datax, float *datay){
+void DataPopulation::writeLoss(vector<float> &tree, float *datax, float *datay){
     for (int i = 0; i < this->priorityVec.size(); i++){
-        this->priorityVec[i][0] = treeLoss(this->priorityVec[i], dataIndex, datax, datay);
+        vector<int> indices = priority2indices(this->priorityVec[i]);
+        this->priorityVec[i][0] = treeLoss(tree, indices, datax, datay);
     }
 }

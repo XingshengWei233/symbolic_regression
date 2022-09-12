@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <fstream>
 using namespace std;
 
 
@@ -59,4 +60,21 @@ float treeLoss(vector<float>& tree,
         sum += squareLoss;
     }
     return sum / dataIndices.size();
+}
+
+void loadData(string loadDir, float *datax, float *datay)
+{
+    ifstream infile;
+    infile.open(loadDir);
+    string s;
+    int i = 0;
+    while (getline(infile, s))
+    {
+        string s1 = s.substr(0, 7);
+        string s2 = s.substr(8);
+        datax[i] = stof(s1);
+        datay[i] = stof(s2);
+        i++;
+    }
+    infile.close();
 }
