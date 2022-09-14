@@ -3,6 +3,7 @@
 #include <algorithm> 
 #include <random>
 #include <string>
+#include <cassert>
 #include <queue>
 #include "UtilFuncs.h"
 using namespace std;
@@ -50,19 +51,19 @@ void TreePopulation::reproduce(int nChildren, int nMutation){
         vector<float>& parent_0 = this->treeVec[rand() % this->popSize];
         vector<float>& parent_1 = this->treeVec[rand() % this->popSize];
 
-        cout<< "parent_0:" << endl;
+        // cout<< "parent_0:" << endl;
         // printTree(parent_0);
-        cout<< "parent_1:" << endl;
+        // cout<< "parent_1:" << endl;
         // printTree(parent_1);
 
         vector<float> newTree = crossover(parent_0, parent_1);
 
-        cout<< "child:" << endl;
+        // cout<< "child:" << endl;
         // printTree(newTree);
 
         mutate(newTree, nMutation);
 
-        cout<< "mutated_child:" << endl;
+        // cout<< "mutated_child:" << endl;
         // printTree(newTree);
 
         this->treeVec.push_back(newTree);
@@ -105,12 +106,14 @@ vector<float> TreePopulation::crossover(vector<float>& parent0, vector<float>& p
         newTree[i] = parent0[i];
     }
     //select a subtree root
-    int subTreeRoot = rand() % this->L;
+    int subTreeRoot = rand() % (this->L - 2) + 2;
     // cout << "subTreeRoot:" << subTreeRoot << endl;
     //use bfs to traverse subtree to replace with parent_1
     queue<int> bfsQueue;
     bfsQueue.push(subTreeRoot);
     while (bfsQueue.empty() == false){
+        // cout << "queue len: " << bfsQueue.size() << endl;
+        assert (bfsQueue.size() < 128);
         int i = bfsQueue.front();
         bfsQueue.pop();
         newTree[i] = parent1[i];
@@ -128,7 +131,7 @@ vector<float> TreePopulation::crossover(vector<float>& parent0, vector<float>& p
 void TreePopulation::select()
 {
     while (this->treeVec.size() > this->popSize){
-        cout << "poped" << endl;
+        // cout << "poped" << endl;
         this->treeVec.pop_back();
     }
 }

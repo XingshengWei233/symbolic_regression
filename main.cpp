@@ -13,9 +13,8 @@
 using namespace std;
  
 //TODO:
-// debug main algorithm
+// print out variation
 // visulizer
-// move load data to util funcs
 
 
 
@@ -25,16 +24,18 @@ int main(int argc, char **argv)
 
     // Parameters:
     
-    const int popSize = 10;
-    const int nIndices = 50;
-    const int nChildren = 5;
+    const int popSize = 20;
+    const int nIndices = 100;
+    const int nChildren = 4;
     const int nMutation = 2;
-    const int nWorker = 6;
-    int iteration = 0;
-    int maxIteration = 100;
-    int indicesRenewInterval = 10;
+    // const int nWorker = 6;
+    int maxIteration = 10000;
+    int indicesRenewInterval = 100;
     float datax[1000];
     float datay[1000];
+    vector<int> trueIndices(1000);
+    iota(trueIndices.begin(), trueIndices.end(), 0);
+
     // load data:
     loadData("data/data.txt", datax, datay);
 
@@ -46,6 +47,10 @@ int main(int argc, char **argv)
     symPop.writeLoss(indices, datax, datay);
     symPop.sortTrees();
     
+    float trueLoss = treeLoss(symPop.treeVec[0], trueIndices, datax, datay);
+    
+
+
     for (int i = 0; i<maxIteration; i++){
         //reproduce, including mutation and creossover
         symPop.reproduce(nChildren, nMutation);
@@ -60,29 +65,34 @@ int main(int argc, char **argv)
             dataPop.sortPriority();
             dataPop.select();
             indices = dataPop.priority2indices(dataPop.priorityVec[0]);
+            
         }
-        cout << endl;
-        for (int i = 0; i < 10; i++){
-            symPop.printTree(symPop.treeVec[i]);
-        }
-        cout << endl;
-        for (int i = 0; i < 10; i++){
-            dataPop.printPriority(dataPop.priorityVec[i]);
-        }
-    }
-    // for (int i = 0; i < 10; i++){
-    //     dataPop.printPriority(dataPop.priorityVec[i]);
-    // }
-    
+        cout << "iteration: " << i << "  ";
+        cout << symPop.treeVec[0][0] << "  " << dataPop.priorityVec[0][0] << endl;
+        // cout << endl;
+        // for (int i = 0; i < 10; i++){
+        //     symPop.printTree(symPop.treeVec[i]);
+        // }
 
+        // cout << endl;
+        // for (int i = 0; i < 10; i++){
+        //     dataPop.printPriority(dataPop.priorityVec[i]);
+        // }
+
+        // cout << endl;
+        
+    }
+    cout << "start loss: " << trueLoss << endl;
+    trueLoss = treeLoss(symPop.treeVec[0], trueIndices, datax, datay);
+    cout << "end loss: " << trueLoss << endl;
     
-    cout << "popSize: " << symPop.treeVec.size() << endl;
+    // cout << "popSize: " << symPop.treeVec.size() << endl;
 
     
     //renew dataIndex = dataPop.dataIndex[0]
 
     
-    cout << "popSize: " << symPop.treeVec.size() << endl;
+    // cout << "popSize: " << symPop.treeVec.size() << endl;
 
     //if iteration % 100 ==0
     //dataPop.reproduce();
@@ -96,7 +106,7 @@ int main(int argc, char **argv)
     // }
     // cout << "expression: " << symPop.expression(0) << endl;
 
-    
+    cout << endl;
     cout << "end of program" << endl;
 
     return 0;

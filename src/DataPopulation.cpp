@@ -74,21 +74,21 @@ void DataPopulation::reproduce(int nChildren, int nMutation)
         vector<float> &parent_0 = this->priorityVec[rand() % this->popSize];
         vector<float> &parent_1 = this->priorityVec[rand() % this->popSize];
 
-        cout << "parent_0:" << endl;
+        // cout << "parent_0:" << endl;
         // printTree(parent_0);
-        cout << "parent_1:" << endl;
+        // cout << "parent_1:" << endl;
         // printTree(parent_1);
 
         vector<float> child = crossover(parent_0, parent_1);
 
-        cout << "child:" << endl;
+        // cout << "child:" << endl;
         // printTree(newTree);
 
         mutate(child, nMutation);
 
-        cout << "mutated_child:" << endl;
-        cout << child.size() << endl;
-        cout << this->priorityVec[0].size() << endl;
+        // cout << "mutated_child:" << endl;
+        // cout << child.size() << endl;
+        // cout << this->priorityVec[0].size() << endl;
         // printTree(newTree);
 
         this->priorityVec.push_back(child);
@@ -140,7 +140,7 @@ void DataPopulation::select()
 {
     while (this->priorityVec.size() > this->popSize)
     {
-        cout << "poped" << endl;
+        // cout << "poped" << endl;
         this->priorityVec.pop_back();
     }
 }
