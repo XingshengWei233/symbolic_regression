@@ -47,10 +47,14 @@ time.h
 -
 string
 -
+fstream
+-
 cassert
 -
 vector
 -
 algorithm
 -
+gnuplot-iostream.h
+/home/xingsheng/symbolic_regression/gnuplot-iostream.h
 
